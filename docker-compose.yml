@@ -1,0 +1,45 @@
+version: "3.8"
+
+services:
+  database:
+    platform: linux/x86_64 #M1Macに対応
+    image: mysql:5.7
+    container_name: db_test
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: db_mysql_test # データベース名
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: admin # ユーザー名
+      MYSQL_PASSWORD: password # ユーザーのパスワード
+    volumes:
+      - ./volumes/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - ./volumes/my.cnf:/etc/mysql/conf.d/my.cnf
+    ports:
+      - "3306:3306"
+
+  php-apache:
+    container_name: php_apache_test
+    build:
+      context: ./php
+    ports:
+      - "8000:80" # localhost:8000でアクセスできる
+    volumes:
+      - ./src:/var/www/search_restaurant
+      - ./apache/default.conf:/etc/apache2/sites-enabled/000-default.conf
+    depends_on:
+      - database # databaseに後に実行する
+
+  phpmyadmin:
+    platform: linux/x86_64 #M1Macに対応
+    image: phpmyadmin/phpmyadmin
+    depends_on:
+      - database # databaseに後に実行する
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOSTS=database # データベース名
+      - PMA_USER=admin # phpMyAdminのユーザー名
+      - PMA_PASSWORD=password # phpMyAdminのパスワード
+    ports:
+      - "3000:80" # localhost:3000でアクセスできる
+    volumes:
+      - ./volumes/docker/phpmyadmin/sessions:/sessions
