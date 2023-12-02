@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// 検索画面
 Route::get('/', function () {
-    return view('welcome');
+    return view('search.home');
 });

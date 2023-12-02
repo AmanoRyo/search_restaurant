@@ -4,7 +4,7 @@ services:
   database:
     platform: linux/x86_64 #M1Macに対応
     image: mysql:5.7
-    container_name: db_test
+    container_name: db
     restart: unless-stopped
     environment:
       MYSQL_DATABASE: db_mysql_test # データベース名
@@ -16,9 +16,10 @@ services:
       - ./volumes/my.cnf:/etc/mysql/conf.d/my.cnf
     ports:
       - "3306:3306"
+    tty: true
 
-  php-apache:
-    container_name: php_apache_test
+  php:
+    container_name: php_apache
     build:
       context: ./php
     ports:
@@ -28,6 +29,7 @@ services:
       - ./apache/default.conf:/etc/apache2/sites-enabled/000-default.conf
     depends_on:
       - database # databaseに後に実行する
+    tty: true
 
   phpmyadmin:
     platform: linux/x86_64 #M1Macに対応
@@ -43,3 +45,4 @@ services:
       - "3000:80" # localhost:3000でアクセスできる
     volumes:
       - ./volumes/docker/phpmyadmin/sessions:/sessions
+    tty: true
