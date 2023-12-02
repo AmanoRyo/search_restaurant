@@ -19,7 +19,7 @@
 			</form>
 			<button>現在地取得</button>
 	</div>
-	<div class="ressult_area">
+	<div class="result_area">
 		<p class="status"></p>
 		<a class="map-link" target="_blank" rel="noopener"></a>
 		<h2></h2>

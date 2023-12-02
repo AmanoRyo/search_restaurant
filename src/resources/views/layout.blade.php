@@ -15,7 +15,7 @@
 		@yield('content')
 	</div>
 
-	<footer>
+	<footer style="margin-top: auto">
 		@include('footer')
 	</footer>
 

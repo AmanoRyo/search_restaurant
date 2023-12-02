@@ -1,2 +1,2 @@
 {{--ヘッダー部--}}
-<h1>Restaurant Search</h1>
+<p>Restaurant Search</p>
