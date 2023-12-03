@@ -17,7 +17,7 @@
 					{{--APIキーを隠しデータとしてクエリの1要素に登録--}}
 					<input type="hidden" id="apikey" value="{{ config('hotpepper.api_key') }}">
 			</form>
-			<button class="get_search">現在地取得</button>
+			<button class="get_search"><i class="fa-solid fa-magnifying-glass"></i>さがす</button>
 	</div>
 	<div class="result_area">
 		<p class="status"></p>
@@ -33,7 +33,7 @@
 						<li class="photo"><img class="shop"></li>
 					</div>
 					<div class="item">
-						<li class="name"><i class="fa-solid fa-shop"></i><a class="shop"></a></li>
+						<li class="name"><i class="fa-solid fa-shop"></i><a class="shop" href = '{{ route('detail') }}'></a></li>
 						<li class="access"><i class="fa-solid fa-map-pin"></i><a class="address"></a></li>
 						<li class="open"></li>
 					</div>

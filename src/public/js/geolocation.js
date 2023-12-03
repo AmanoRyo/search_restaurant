@@ -93,7 +93,6 @@ function getPosition(event) {
       clone.querySelector(
         ".name a"
       ).textContent = ` ${json.results.shop[i].name}`;
-      clone.querySelector(".name a").href = json.results.shop[i].urls.pc;
       clone.querySelector(
         ".access a"
       ).textContent = json.results.shop[i].address;

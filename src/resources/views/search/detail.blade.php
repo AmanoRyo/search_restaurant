@@ -2,5 +2,5 @@
 @extends('layout')
 @section('title', '店舗詳細')
 @section('content')
-
+<p>あああ</p>
 @endsection

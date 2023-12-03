@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   database:
-    platform: linux/x86_64 #M1Macに対応
+    platform: linux/amd64 #M1Macに対応
     image: mysql:5.7
     container_name: db
     restart: unless-stopped
@@ -18,10 +18,11 @@ services:
       - "3306:3306"
     tty: true
 
-  php:
-    container_name: php_apache
+  app:
+    platform: linux/amd64 #M1Macに対応
+    container_name: app
     build:
-      context: ./php
+      context: ./docker/php
     ports:
       - "8000:80" # localhost:8000でアクセスできる
     volumes:
@@ -32,7 +33,7 @@ services:
     tty: true
 
   phpmyadmin:
-    platform: linux/x86_64 #M1Macに対応
+    platform: linux/amd64 #M1Macに対応
     image: phpmyadmin/phpmyadmin
     depends_on:
       - database # databaseに後に実行する
@@ -46,3 +47,15 @@ services:
     volumes:
       - ./volumes/docker/phpmyadmin/sessions:/sessions
     tty: true
+
+  nginx:
+    platform: linux/arm64/v8 #M1Macに対応
+    container_name: "nginx"
+    build:
+      context: ./docker/nginx
+    depends_on:
+      - app
+    ports:
+      - 80:80
+    volumes:
+      - ./:/src
