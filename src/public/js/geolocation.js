@@ -18,7 +18,9 @@ function getPosition(event) {
     // 位置情報取得成功時にsuccess()、そして取得失敗時にerror()がコールされる
     // optionsはgetCurrentPosition()に渡す設定値
   } else {
-    status.textContent = "Locating…";
+    const spinner = document.createElement("i");
+    spinner.className = "fa-solid fa-spinner fa-spin-pulse fa-2xl"; //ロードスピナー表示
+    status.append(spinner);
     navigator.geolocation.getCurrentPosition(success, error);
   }
   // 位置情報取得処理が成功した時にコールされる関数
@@ -87,20 +89,17 @@ function getPosition(event) {
     for (let i = 0; i < json.results.shop.length; i++) {
       const clone = template.content.cloneNode(true);
 
+      clone.querySelector(".photo img").src = json.results.shop[i].photo.pc.m;
       clone.querySelector(
         ".name a"
-      ).textContent = `店名：${json.results.shop[i].name}`;
+      ).textContent = ` ${json.results.shop[i].name}`;
       clone.querySelector(".name a").href = json.results.shop[i].urls.pc;
       clone.querySelector(
         ".access a"
-      ).textContent = `住所：${json.results.shop[i].address}`;
-      clone.querySelector(".access a").href = json.results.shop[i].coupon_urls.pc;
-      clone.querySelector(
-        ".average"
-      ).textContent = `予算：${json.results.shop[i].budget.average}`;
+      ).textContent = json.results.shop[i].address;
       clone.querySelector(
         ".open"
-      ).textContent = `営業時間：${json.results.shop[i].open}`;
+      ).textContent = ` ${json.results.shop[i].open}`;
 
       fragment.appendChild(clone);
     }

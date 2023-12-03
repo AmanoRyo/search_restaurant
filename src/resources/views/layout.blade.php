@@ -4,6 +4,7 @@
 		<meta charset="UTF-8">
 		<title>@yield('title')</title>
 		<link rel="stylesheet" href="{{ asset('/css/base.css') }}" >
+		<link href="https://use.fontawesome.com/releases/v6.5.0/css/all.css" rel="stylesheet">
 </head>
 <body>
 
