@@ -29,21 +29,25 @@ footer p {
 	color: #fff;
 	font-size: 0.875rem;
 }
-.search{
+
+/*コンテンツ全体*/
+.content{
 	margin: 40px;
+  display:flex;
 }
-.top {
-	text-align: center;
-}
-.result_area {
-	flex: 1;
-}
+
 .status{
 	text-align: center;
 }
 h1 {
   font-size: 20px;
   color: #158b2b;
+}
+h2 {
+  color: #158b2b;
+  font-size: 20px;
+  padding: 10px 0;
+  margin: 0;
 }
 form {
   font-weight: bold;
@@ -74,77 +78,12 @@ select {
 select::-ms-expand {
   display: none;
 }
-
 select:focus {
   outline: 0;
   box-shadow: 0 0 0 2px rgb(33, 150, 243) inset;
 }
-.get_search {
-  max-width: 180px;
-  height: 50px;
-  text-align: center;
-  border: 2px solid #158b2b;
-  font-size: 16px;
-  color: #158b2b;
-  text-decoration: none;
-  font-weight: bold;
-  padding: 8px 16px;
-  border-radius: 4px;
-  transition: 0.4s;
-}
 
-button:hover {
-  background-color: #9ec34b;
-  border-color: #cbe585;
-  color: #fff;
-}
-.shoplist {
-	background: #fffcf4;
-	border-radius: 8px;
-	box-shadow: 0px 0px 5px silver;
-	padding: 0.5em 0.5em 0.5em 2em;
-	display: flex;
-	align-items: center;
-	gap: 10px;
-}
-.shoplist li{
-	line-height: 1.5; 
-  padding: 0.5em 0;
-	list-style: none;
-}
-.shop{
-  color: black;
-  font-weight: bold;
-	font-size: 20px;
-  transition: color 0.3s;
-}
-.shop:hover {
-  color: #ff7043;
-}
-.next {
-  width: 500px;
-}
-span a {
-  margin: 0 7px 0 7px;
-  display: inline-block;
-  cursor: pointer;
-  font-size: 14px;
-}
-span a:hover {
-  color: white;
-  background-color: blueviolet;
-}
-h2 {
-  color: #158b2b;
-  font-size: 20px;
-  padding: 10px 0;
-  margin: 0;
-}
-.page {
-  margin: 0;
-}
-.photo img{
-	width: 150px;
-	height: 150px;
-	object-fit: cover;
-}
+
+
+
+

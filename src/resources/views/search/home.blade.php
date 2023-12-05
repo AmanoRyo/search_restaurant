@@ -2,9 +2,8 @@
 @extends('layout')
 @section('title', 'レストラン検索')
 @section('content')
-<div class="search">
-	<h3>現在地を取得しグルメサーチAPIを利用して近隣のお店を表示します。</h3>
-	<div class="top">
+<div class="content">
+	<div class="input_area">
 			<form>
 					<label for="ranges">検索範囲</label>
 					<select id="ranges">
@@ -14,12 +13,10 @@
 							<option value="4">2000m </option>
 							<option value="5">3000m </option>
 					</select>
-					{{--APIキーを隠しデータとしてクエリの1要素に登録--}}
-					<input type="hidden" id="apikey" value="{{ config('hotpepper.api_key') }}">
 			</form>
 			<button class="get_search"><i class="fa-solid fa-magnifying-glass"></i>さがす</button>
 	</div>
-	<div class="result_area">
+	<div class="output_area">
 		<p class="status"></p>
 		<a class="map-link" target="_blank" rel="noopener"></a>
 		<h2></h2>
@@ -28,18 +25,27 @@
 		<div class="next"></div>
 		<div class="main"></div>
 		<template id="template">
-				<ul class="shoplist">
-					<div class="item">
-						<li class="photo"><img class="shop"></li>
+			<form action='{{ route('detail') }}'>
+				<button type="submit" class="shoplist">
+					<div class="thumbnail">
+						<ul>
+							<li class="show-photo"><img></li>
+						</ul>
 					</div>
-					<div class="item">
-						<li class="name"><i class="fa-solid fa-shop"></i><a class="shop" href = '{{ route('detail') }}'></a></li>
-						<li class="access"><i class="fa-solid fa-map-pin"></i><a class="address"></a></li>
-						<li class="open"></li>
+					<div class="caption">
+						<ul>
+							<li class="show-name"><i class="fa-solid fa-shop"></i><a></a></li>
+							<li class="show-access"><i class="fa-solid fa-map-pin"></i><a></a></li>
+							<li class="show-open"></li>
+								@csrf
+								<input type="hidden" name="name" class="name">
+								<input type="hidden" name="shop_id" class="shop_id">
+						</ul>
 					</div>
-				</ul>
+				</button>
+			</form>
 		</template>
 	</div>
 </div>
-<script src="{{ asset('/js/geolocation.js') }}"></script>
+<script src="{{ asset('/js/locationsearch.js') }}"></script>
 @endsection

@@ -1,0 +1,101 @@
+/*
+検索結果ページ部分
+*/
+
+/*検索条件入力エリア*/
+.input_area {
+	text-align: center;
+	float: left;
+	width:30%;
+	clear: both;
+  position: sticky;
+}
+
+/*検索結果出力エリア*/
+.output_area {
+	flex: 1;
+	margin-left:10px;
+}
+
+.get_search {
+  max-width: 180px;
+  height: 50px;
+  text-align: center;
+  border: 2px solid #158b2b;
+  font-size: 16px;
+  color: #158b2b;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: 0.4s;
+}
+
+button:hover {
+  background-color: #9ec34b;
+  border-color: #cbe585;
+  color: #fff;
+}
+
+/*検索結果で出力される店舗のリスト*/
+.shoplist {
+	background: #fffcf4;
+	border-radius: 8px;
+	box-shadow: 0px 0px 5px silver;
+	padding: 0.5em 0.5em 0.5em 2em;
+	display: flex;
+	align-items: center;
+  width: 95%;
+  transition: 0.4s;
+  margin: 30px;
+}
+
+.shoplist li{
+	line-height: 1.5; 
+  padding: 0.5em 0;
+	list-style: none;
+}
+
+.show-name{
+  color: black;
+  font-weight: bold;
+	font-size: 20px;
+  transition: color 0.3s;
+}
+
+.shop:hover {
+  color: #ff7043;
+}
+
+.next {
+  width: 500px;
+}
+
+span a {
+  margin: 0 7px 0 7px;
+  display: inline-block;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+span a:hover {
+  color: white;
+  background-color: blueviolet;
+}
+
+.page {
+  margin: 0;
+}
+
+/*サムネイル*/
+.show-photo img{
+	width: 150px;
+	height: 150px;
+	object-fit: cover;
+	border-radius: 5%;
+}
+
+/*店舗名などのキャプション*/
+.caption{
+	text-align: left;
+}

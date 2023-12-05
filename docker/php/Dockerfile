@@ -1,23 +1,35 @@
 FROM php:8.2.10-apache
+RUN apt-get update \
+    && apt-get install -y \
+    git \
+    zip \
+    unzip \
+    vim \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    libmcrypt-dev \
+    libpng-dev \
+    libfontconfig1 \
+    libxrender1
 
-RUN apt update \
-        && apt install -y \
-            g++ \
-            libicu-dev \
-            libpq-dev \
-            libzip-dev \
-            zip \
-            zlib1g-dev \
-            npm \
-            nodejs \
-            vim \
-        && docker-php-ext-install \
-            intl \
-            opcache \
-            pdo \
-            pdo_pgsql \
-            pgsql
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg
+RUN docker-php-ext-install gd
+RUN docker-php-ext-install bcmath
+RUN docker-php-ext-install pdo_mysql mysqli exif
+RUN cd /usr/bin && curl -s http://getcomposer.org/installer | php && ln -s /usr/bin/composer.phar /usr/bin/composer
+
+ENV NODE_VERSION=16.16.0
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+ENV NVM_DIR=/root/.nvm
+RUN . "$NVM_DIR/nvm.sh" && nvm install ${NODE_VERSION}
+RUN . "$NVM_DIR/nvm.sh" && nvm use v${NODE_VERSION}
+RUN . "$NVM_DIR/nvm.sh" && nvm alias default v${NODE_VERSION}
+ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
+RUN node --version
+RUN npm --version
 
 WORKDIR /var/www/search_restaurant
+ADD . /src/storage
+RUN chown -R www-data:www-data /src/storage
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN a2enmod rewrite

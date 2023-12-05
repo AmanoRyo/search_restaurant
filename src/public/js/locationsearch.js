@@ -47,7 +47,7 @@ function getPosition(event) {
       body: postData,
     };
     // FetchApiを使ってグルメサーチAPIからjsonを取得するリクエストをする
-    const res = await fetch('/php/search_query.php', data);
+    const res = await fetch('/php/location_search_query.php', data);
     const d = await res.json();
     const json = await JSON.parse(d);
 
@@ -89,16 +89,23 @@ function getPosition(event) {
     for (let i = 0; i < json.results.shop.length; i++) {
       const clone = template.content.cloneNode(true);
 
-      clone.querySelector(".photo img").src = json.results.shop[i].photo.pc.m;
+      clone.querySelector(".show-photo img").src = json.results.shop[i].photo.pc.m;
       clone.querySelector(
-        ".name a"
+        ".show-name a"
       ).textContent = ` ${json.results.shop[i].name}`;
       clone.querySelector(
-        ".access a"
+        ".show-access a"
       ).textContent = json.results.shop[i].address;
       clone.querySelector(
-        ".open"
+        ".show-open"
       ).textContent = ` ${json.results.shop[i].open}`;
+
+      clone.querySelector(
+        ".name"
+      ).value = `${json.results.shop[i].name}`;
+      clone.querySelector(
+        ".shop_id"
+      ).value = `${json.results.shop[i].id}`;
 
       fragment.appendChild(clone);
     }
