@@ -1,0 +1,166 @@
+/*
+店舗詳細ページ部分
+*/
+
+/* ローディング画面 */
+#loading {
+  width: 100vw;
+  height: 100vh;
+  transition: all 1s;
+  background-color: #eb7921;
+	position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}
+.spinner {
+  width: 100px;
+  height: 100px;
+  margin: 200px auto;
+  background-color: #fff;
+  border-radius: 100%;
+  animation: sk-scaleout 1.0s infinite ease-in-out;
+}
+/* ローディングアニメーション */
+@keyframes sk-scaleout {
+  0% {
+    transform: scale(0);
+  } 100% {
+    transform: scale(1.0);
+    opacity: 0;
+  }
+}
+ 
+/*画面がロードしたら消えるように*/
+.loaded {
+  opacity: 0;
+  visibility: hidden;
+}
+
+
+
+/*ページ全体*/
+.content {
+	flex-flow: column;
+	margin: 70px;
+}
+
+/*基本情報部分*/
+.top_area {
+	justify-content: space-between; 
+	margin: 0 auto;
+	width: 90%;
+	min-width: 800px;
+	padding: 25px;
+	border-radius: 8px;
+	background-color: #ffffff;
+	box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.363); /* ドロップシャドウの設定 */
+}
+
+/*基本情報部分外*/
+.explanation_area {
+	justify-content: space-between; 
+	margin: 0 auto;
+	width: 90%;
+	display: flex;
+}
+
+ul {
+	list-style: none;
+}
+
+.top-name li {
+	margin-bottom: 15px;
+}
+
+.top-etc {
+	padding-left: 40px;
+}
+
+hr {
+	border-top: 1px solid #e7e7e7;
+}
+
+/*店舗名よみがな*/
+.name-kana {
+	font-size: 13px;
+	font-weight: normal;
+}
+
+/*店舗名*/
+.name {
+	font-size: 30px;
+	font-weight: bold;
+	line-height: 35px;
+}
+
+.item {
+	display: flex;
+	align-items: center;
+}
+
+.item i{
+	margin-right: 10px;
+}
+
+.item p {
+	line-height: 20px;
+}
+
+.item-title {
+	color: #191d3b;
+	font-weight: bold;
+	width: 80px;
+	text-align: justify;
+	text-align-last:justify;
+	margin-right: 10px;
+}
+
+.map {
+	margin-top: -3px;
+	margin-left: 10px;
+	font-size: small;
+	color: #eb7921;
+	width: 12%;
+}
+
+/*店舗写真*/
+.photo {
+	margin-top: 30px;
+	margin-right: 20px;
+	width: 360px;
+	height: auto;
+	max-height: 400px;
+	object-fit: cover;
+	border-radius: 3%;
+}
+
+/*追加情報*/
+.option {
+	height: 100px;
+	margin: 30px auto;
+	width: 100%;
+	min-width: 420px;
+	padding: 25px;
+	border-radius: 8px;
+	background-color: #ffffff;
+	box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.363);
+}
+
+.opt-icon {
+	height: 50px;
+}
+
+.opt-icon-item {
+	text-align: center;
+}
+
+.opt-text {
+	width: 90px
+}
+
+.opt-text-item {
+	text-align: center;
+	font-size: smaller;
+	font-weight: bold;
+}

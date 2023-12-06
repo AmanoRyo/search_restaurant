@@ -6,40 +6,155 @@
 .input_area {
 	text-align: center;
 	float: left;
-	width:30%;
+	width: 30%;
 	clear: both;
   position: sticky;
+  min-width: 200px;
 }
 
 /*検索結果出力エリア*/
 .output_area {
 	flex: 1;
 	margin-left:10px;
+  min-width: 500px;
+}
+
+
+form {
+  font-weight: bold;
+  color: #FF9241;
+  font-size: 16px;
+}
+
+.search_msg {
+  font-weight: bold;
+  color: #191d3b;
+  font-size: medium;
+  margin: 8px auto;
+}
+
+.search_option {
+  justify-content: space-between; 
+	margin: 20px auto;
+	width: 70%;
+	padding: 25px;
+	border-radius: 8px;
+	background-color: #ffffff;
+	box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.363); /* ドロップシャドウの設定 */
+}
+
+/* チェックボックス */
+input[type=checkbox] {
+  display: none;
+}
+.kodawari-cb {
+  text-align: justify;
+	text-align-last: justify;
+  box-sizing: border-box;
+  cursor: pointer;
+  display:flex;
+  flex-flow: column;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 120px;
+  position: relative;
+  align-items: center;
+  margin: 0 auto;
+}
+.kodawari-cb::before {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  content: '';
+  display: block;
+  height: 16px;
+  left: -25px;
+  margin-top: -8px;
+  top: 50%;
+  width: 16px;
+  text-align: left;
+  position: absolute;
+}
+.kodawari-cb::after {
+  border-right: 6px solid #FF9241;
+  border-bottom: 3px solid #FF9241;
+  content: '';
+  display: block;
+  height: 20px;
+  left: -20px;
+  margin-top: -16px;
+  opacity: 0;
+  top: 50%;
+  transform: rotate(45deg) translate3d(0,2px,0) scale3d(.7,.7,1);
+  transition: transform .2s ease-in-out, opacity .2s ease-in-out;
+  width: 9px;
+  position: absolute;
+}
+input[type=checkbox]:checked + .kodawari-cb::before {
+  border-color: #666;
+}
+input[type=checkbox]:checked + .kodawari-cb::after {
+  opacity: 1;
+  transform: rotate(45deg) scale3d(1,1,1);
+}
+
+.msg {
+  font-weight: bold;
+  color: #191d3b;
+  font-size: 16px;
+}
+
+select {
+  text-align: center;
+  text-align-last: center;
+  -moz-text-align-last: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: #FF9241;
+  height: 50px;
+  width: 100px;
+  margin: 10px 0 10px 0;
+  padding: 0 8px;
+  border-radius: 4px;
+  border: none;
+  box-shadow: 0 0 0 1px #ccc inset;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+}
+select::-ms-expand {
+  display: none;
+}
+select:focus {
+  outline: 0;
+  box-shadow: 0 0 0 2px #FF9241 inset;
 }
 
 .get_search {
   max-width: 180px;
   height: 50px;
   text-align: center;
-  border: 2px solid #158b2b;
+  border: 0px solid #7b7b7b;
+  background-color: #ffffff;
   font-size: 16px;
-  color: #158b2b;
+  color: #191d3b;
   text-decoration: none;
   font-weight: bold;
   padding: 8px 16px;
-  border-radius: 4px;
+  border-radius: 45px;
   transition: 0.4s;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.363);
 }
 
-button:hover {
-  background-color: #9ec34b;
-  border-color: #cbe585;
-  color: #fff;
+.get_search:hover {
+  background-color: #ffcfab;
+  transform: scale(1.05);
 }
 
 /*検索結果で出力される店舗のリスト*/
 .shoplist {
-	background: #fffcf4;
+	background: #ffeada;
 	border-radius: 8px;
 	box-shadow: 0px 0px 5px silver;
 	padding: 0.5em 0.5em 0.5em 2em;
@@ -56,31 +171,69 @@ button:hover {
 	list-style: none;
 }
 
+.shoplist:hover{
+	background-color: #fcb177;
+  transform: scale(1.05);
+}
+
 .show-name{
-  color: black;
+  color: #191d3b;
   font-weight: bold;
 	font-size: 20px;
   transition: color 0.3s;
 }
 
-.shop:hover {
-  color: #ff7043;
-}
-
+/*ページング番号*/
 .next {
-  width: 500px;
+  display: block;
+  text-align: center;
 }
 
-span a {
+.pagination {
+  font-size: small;
   margin: 0 7px 0 7px;
   display: inline-block;
   cursor: pointer;
-  font-size: 14px;
+  color: white;
+  background-color: #191d3b;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  transition: color 0.3s;
 }
 
-span a:hover {
+.ellipsis {
+  margin: 0 7px 0 7px;
+  display: inline-block;
+  cursor: pointer;
+  background-color: #191d3b;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+}
+
+.pagination-current {
+  font-size: small;
+  margin: 0 7px 0 7px;
+  display: inline-block;
+  cursor: pointer;
   color: white;
-  background-color: blueviolet;
+  background-color: #ff7043;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  transition: color 0.3s;
+}
+
+.pagination:hover {
+  color: white;
+  background-color: #ff7043;
 }
 
 .page {

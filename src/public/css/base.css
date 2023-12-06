@@ -6,22 +6,30 @@ body {
 		display: flex; /* フレックスボックスの有効 */
 		flex-flow: column; /* 要素を縦に並べる */
 		min-height: 100vh; /* 最小でも画面の高さ分のbodyの高さを担保 */
+    line-height: 60%;
 }
 
 header {
-		background-color: #e78139;
+		background-color: #FF9241;
 		color: #fff;
-		padding: 0.025px;
+		padding: 0.5px;
 		text-align: center;
+    height: 50%;
 }
-header p {
+header h3 {
 	color: #fff;
-	font-size: 25px;
+	font-size: 13px;
+  font-family: 'RocknRoll One', sans-serif;
+}
+header h1 {
+	color: #fff;
+	font-size: 40px;
+  font-family: 'RocknRoll One', sans-serif;
 }
 
 footer {
 		position: sticky;
-		background: #333;
+		background: #191d3b;
 		padding: 10px;
 		text-align: center;
 }
@@ -39,49 +47,27 @@ footer p {
 .status{
 	text-align: center;
 }
+
 h1 {
   font-size: 20px;
-  color: #158b2b;
+  color: #191d3b;
 }
+
 h2 {
-  color: #158b2b;
+  color: #191d3b;
   font-size: 20px;
   padding: 10px 0;
   margin: 0;
 }
-form {
-  font-weight: bold;
-  color: #158b2b;
-  font-size: 16px;
+
+p {
+  color: #191d3b;
 }
-label {
-  margin: 10px;
+
+i {
+  color: #191d3b;
 }
-select {
-  text-align: center;
-  text-align-last: center;
-  -moz-text-align-last: center;
-  font-size: 16px;
-  color: #158b2b;
-  height: 50px;
-  width: 150px;
-  margin: 10px 0 10px 0;
-  padding: 0 8px;
-  border-radius: 4px;
-  border: none;
-  box-shadow: 0 0 0 1px #ccc inset;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  cursor: pointer;
-}
-select::-ms-expand {
-  display: none;
-}
-select:focus {
-  outline: 0;
-  box-shadow: 0 0 0 2px rgb(33, 150, 243) inset;
-}
+
 
 
 

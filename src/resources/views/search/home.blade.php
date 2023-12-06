@@ -1,28 +1,50 @@
 {{--検索画面--}}
 @extends('layout')
 @section('title', 'レストラン検索')
+@section('stylesheet')
+<link rel="stylesheet" href="{{ asset('/css/locationsearch.css') }}" >
+@endsection
 @section('content')
 <div class="content">
 	<div class="input_area">
 			<form>
-					<label for="ranges">検索範囲</label>
-					<select id="ranges">
-							<option value="1">300m</option>
-							<option value="2">500m</option>
-							<option value="3">1000m </option>
-							<option value="4">2000m </option>
-							<option value="5">3000m </option>
-					</select>
+					<div class="search_option">
+						<div class="search_msg">こだわり条件でしぼる</div>
+						<br>
+						<div class="kodawari">
+							<input name="kodawari-cb" type="checkbox" id="parkings">
+							<label class="kodawari-cb" for="parkings">駐車場あり</label>
+							<input name="kodawari-cb" type="checkbox" id="wifis">
+							<label class="kodawari-cb" for="wifis">WiFiあり</label>
+							<input name="kodawari-cb" type="checkbox" id="pets">
+							<label class="kodawari-cb" for="pets">ぺットOK</label>
+							<input name="kodawari-cb" type="checkbox" id="lunchs">
+							<label class="kodawari-cb" for="lunchs">ランチあり</label>
+							<input name="kodawari-cb" type="checkbox" id="non_smokings">
+							<label class="kodawari-cb" for="non_smokings">禁煙席あり</label>
+						</div>
+					</div>
+					<div class="search_option">
+						<div class="search_msg">ココから半径</div>
+						<select id="ranges">
+								<option value="1">300m</option>
+								<option value="2">500m</option>
+								<option value="3">1000m </option>
+								<option value="4">2000m </option>
+								<option value="5">3000m </option>
+						</select>
+						<div class="search_msg">のレストランをさがす</div>
+					</div>
 			</form>
-			<button class="get_search"><i class="fa-solid fa-magnifying-glass"></i>さがす</button>
+			<p>
+				<button class="get_search"><i class="fa-solid fa-magnifying-glass"></i>さがす</button>
+			</p>
 	</div>
 	<div class="output_area">
-		<p class="status"></p>
-		<a class="map-link" target="_blank" rel="noopener"></a>
 		<h2></h2>
 		<p class="page"></p>
-		<span></span>
-		<div class="next"></div>
+		<p class="status"></p>
+		<p class="loading"></p>
 		<div class="main"></div>
 		<template id="template">
 			<form action='{{ route('detail') }}'>
@@ -34,9 +56,9 @@
 					</div>
 					<div class="caption">
 						<ul>
-							<li class="show-name"><i class="fa-solid fa-shop"></i><a></a></li>
-							<li class="show-access"><i class="fa-solid fa-map-pin"></i><a></a></li>
-							<li class="show-open"></li>
+							<li class="show-name"><i class="fa-solid fa-shop fa-fw"></i><a></a></li>
+							<li class="show-access"><i class="fa-solid fa-map-pin fa-fw"></i><a></a></li>
+							<li class="show-genre"><i class="fa-solid fa-tag fa-fw"></i><a></a></li>
 								@csrf
 								<input type="hidden" name="name" class="name">
 								<input type="hidden" name="shop_id" class="shop_id">
@@ -45,6 +67,8 @@
 				</button>
 			</form>
 		</template>
+		<br>
+		<span class="next"></span>
 	</div>
 </div>
 <script src="{{ asset('/js/locationsearch.js') }}"></script>
