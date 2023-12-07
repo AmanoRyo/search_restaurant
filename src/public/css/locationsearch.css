@@ -26,6 +26,7 @@ form {
   font-size: 16px;
 }
 
+/*検索ボックスにあるテキスト*/
 .search_msg {
   font-weight: bold;
   color: #191d3b;
@@ -33,6 +34,7 @@ form {
   margin: 8px auto;
 }
 
+/*検索ボックスにあるテキストボックス*/
 .search_option {
   justify-content: space-between; 
 	margin: 20px auto;
@@ -40,7 +42,7 @@ form {
 	padding: 25px;
 	border-radius: 8px;
 	background-color: #ffffff;
-	box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.363); /* ドロップシャドウの設定 */
+	box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.363);
 }
 
 /* チェックボックス */
@@ -98,12 +100,8 @@ input[type=checkbox]:checked + .kodawari-cb::after {
   transform: rotate(45deg) scale3d(1,1,1);
 }
 
-.msg {
-  font-weight: bold;
-  color: #191d3b;
-  font-size: 16px;
-}
 
+/*検索範囲セレクタ*/
 select {
   text-align: center;
   text-align-last: center;
@@ -131,6 +129,7 @@ select:focus {
   box-shadow: 0 0 0 2px #FF9241 inset;
 }
 
+/*検索ボタン*/
 .get_search {
   max-width: 180px;
   height: 50px;
@@ -146,11 +145,11 @@ select:focus {
   transition: 0.4s;
   box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.363);
 }
-
 .get_search:hover {
   background-color: #ffcfab;
   transform: scale(1.05);
 }
+
 
 /*検索結果で出力される店舗のリスト*/
 .shoplist {
@@ -164,18 +163,17 @@ select:focus {
   transition: 0.4s;
   margin: 30px;
 }
-
 .shoplist li{
 	line-height: 1.5; 
   padding: 0.5em 0;
 	list-style: none;
 }
-
 .shoplist:hover{
 	background-color: #fcb177;
   transform: scale(1.05);
 }
 
+/*店舗名テキスト*/
 .show-name{
   color: #191d3b;
   font-weight: bold;
@@ -189,6 +187,7 @@ select:focus {
   text-align: center;
 }
 
+/*ページネーション部*/
 .pagination {
   font-size: small;
   margin: 0 7px 0 7px;
@@ -203,7 +202,12 @@ select:focus {
   text-align: center;
   transition: color 0.3s;
 }
+.pagination:hover {
+  color: white;
+  background-color: #ff7043;
+}
 
+/*ページネーションに入る省略記号（...）*/
 .ellipsis {
   margin: 0 7px 0 7px;
   display: inline-block;
@@ -216,6 +220,7 @@ select:focus {
   text-align: center;
 }
 
+/*現在のページに対応するページネーション*/
 .pagination-current {
   font-size: small;
   margin: 0 7px 0 7px;
@@ -231,13 +236,9 @@ select:focus {
   transition: color 0.3s;
 }
 
-.pagination:hover {
-  color: white;
-  background-color: #ff7043;
-}
-
+/*表示ページ番号テキスト*/
 .page {
-  margin: 0;
+  margin: 5px;
 }
 
 /*サムネイル*/

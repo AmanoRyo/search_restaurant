@@ -6,39 +6,51 @@ function getPosition(event) {
   const PAGE_ITEM_LIMIT = 10; // 1ページに表示されるお店数の限度
   var CURRENT_PAGE; // 現在ページ
 
-  const status = document.querySelector(".status");
-  const p = document.querySelector(".page");
-  const key = apikey.value;
-  const range = ranges.value;
-  var parking = "0";
-  var wifi = "0";
-  var pet ="0";
-  var lunch = "0";
-  var non_smoking = "0";
-  const start = event.target.value;
-  const page = event.target.dataset.page;
+  const status = document.querySelector(".status"); // 状況メッセージ部
+  const p = document.querySelector(".page");  // ページネーション部
+  const key = apikey.value; // APIキー
+  const range = ranges.value; // 検索半径
+  const start = event.target.value; // 検索開始位置
+  const page = event.target.dataset.page; // ページ
 
-  // ブラウザがGeolocation APIに対応しているかをチェック
+  var parking = "0";      // こだわり条件（駐車場あり：１）
+  var wifi = "0";         // こだわり条件（wifiあり：１）
+  var pet ="0";           // こだわり条件（ぺットOK：１）
+  var lunch = "0";        // こだわり条件（ランチあり：１）
+  var non_smoking = "0";  // こだわり条件（全面禁煙：１）
+
+  //ブラウザがGeolocation APIに対応しているかをチェック
+  //対応している -> 位置情報取得開始
+  //位置情報取得成功時 : success()
+  //位置情報取得失敗時 : error()
   if (!navigator.geolocation) {
     status.textContent = "ブラウザがGeolocationに対応していません";
-    // 対応している → 位置情報取得開始
-    // 位置情報取得成功時にsuccess()、そして取得失敗時にerror()がコールされる
-    // optionsはgetCurrentPosition()に渡す設定値
   }
-  else if (!search_flag) {
+  else if (!search_flag) {  // ロード中に検索ボタンを無効にする
     search_flag = true;
     const loadicon = document.createElement("i");
-    loadicon.className = "fa-solid fa-utensils fa-flip fa-4x"; //ロードスピナー表示
+    loadicon.className = "fa-solid fa-utensils fa-flip fa-4x"; // ロードスピナー表示
     status.append(loadicon);
     navigator.geolocation.getCurrentPosition(success, error);
   }
-  // 位置情報取得処理が成功した時にコールされる関数
-  // 引数として、coords(coordinates。緯度・経度など)とtimestamp(タイムスタンプ)の2つを持ったpositionが渡される
+
+
+  /**
+   * 位置情報取得処理が成功したときに実行される関数
+   * 検索条件を登録し検索結果を表示させる
+   * @param position coords(緯度・経度など)とtimestampの2つを持つオブジェクト
+   */
   async function success(position) {
     search_flag = false;
     status.textContent = "";
     const latitude = position.coords.latitude; // 緯度取得
     const longitude = position.coords.longitude; // 経度取得
+
+    // テストケース（新宿）
+    //const latitude = 35.7015817; // 緯度取得
+    //const longitude = 139.6679975; // 経度取得
+
+    // どのページを表示しているかを説明する
     if(page === undefined){
       p.textContent = `1ページ目を表示しています。`;
       CURRENT_PAGE = 1;
@@ -48,27 +60,28 @@ function getPosition(event) {
       CURRENT_PAGE = page;
     }
 
-    if (parkings.checked) {
+    // こだわり条件の登録
+    if (parkings.checked) { // 駐車場あり
       parking = "1";
     } else {
       parking = "0";
     }
-    if (wifis.checked) {
+    if (wifis.checked) {  // wifiあり
       wifi = "1";
     } else {
       wifi = "0";
     }
-    if (pets.checked) {
+    if (pets.checked) { // ぺットOK
       pet = "1";
     } else {
       pet = "0";
     }
-    if (lunchs.checked) {
+    if (lunchs.checked) { // ランチあり
       lunch = "1";
     } else {
       lunch = "0";
     }
-    if (non_smokings.checked) {
+    if (non_smokings.checked) { // 全面禁煙
       non_smoking = "1";
     } else {
       non_smoking = "0";
@@ -91,6 +104,7 @@ function getPosition(event) {
       method: "POST",
       body: postData,
     };
+
     // FetchApiを使ってグルメサーチAPIからjsonを取得するリクエストをする
     const res = await fetch('/php/location_search_query.php', data);
     const d = await res.json();
@@ -99,8 +113,12 @@ function getPosition(event) {
     renderJson(json);
   }
 
-  // 位置情報取得処理が失敗した時にコールされる関数
-  // 引数として、code(コード)とmessage(メッセージ)の2つを持ったpositionErrorが渡される
+
+  /**
+   * 位置情報取得処理が失敗したときに実行される関数
+   * 対応したエラーメッセージを表示させる
+   * @param positionError code(コード)とmessage(メッセージ)の2つを持つオブジェクト
+   */
   function error(positionError) {
     search_flag = false;
     switch (positionError.code) {
@@ -109,7 +127,7 @@ function getPosition(event) {
         break;
         
       case 1: // 1:PERMISSION_DENIED
-        status.textContent = "	位置情報の取得が許可されませんでした。";
+        status.textContent = "位置情報の取得が許可されませんでした。";
         break;
 
       case 2: // 2:POSITION_UNAVAILABLE
@@ -123,59 +141,67 @@ function getPosition(event) {
     }
   }
 
-  // グルメサーチAPIから取得したjsonの内容をjavascriptでhtmlに反映させる関数
+
+  /**
+   * グルメサーチAPIから取得したjsonの内容をjavascriptでhtmlに反映させる関数
+   * @param {JSON} json 検索結果
+   */
   function renderJson(json) {
     document.querySelector(".next").innerHTML = "";
     document.querySelector(".main").innerHTML = "";
 
-    var msg;
+    var msg;  // 検索結果メッセージ
+
+    // 検索ヒット件数に応じたメッセージを表示
     if (json.results.results_available > 0) {
       msg = `${json.results.results_available}件見つかりました。距離の近い順に表示しています。`;
       p.style.display = "block"
     }
     else {
-      msg = "申し訳ございませんが、条件にあう店舗が見つかりませんでした。";
+      msg = "申し訳ありません。条件にあう店舗が見つかりませんでした。";
       p.style.display = "none"
     }
     document.querySelector(
       "h2"
     ).textContent = msg;
+
     var fragment = document.createDocumentFragment();
     const template = document.getElementById("template");
+
+    // リストに表示させる店舗情報を記載し詳細画面で必要な情報を登録する
     for (let i = 0; i < json.results.shop.length; i++) {
       const clone = template.content.cloneNode(true);
-
-      clone.querySelector(".show-photo img").src = json.results.shop[i].photo.pc.m;
+      clone.querySelector(".show-photo img").src = json.results.shop[i].photo.pc.m; // サムネイル
       clone.querySelector(
         ".show-name a"
-      ).textContent = ` ${json.results.shop[i].name}`;
+      ).textContent = ` ${json.results.shop[i].name}`;  // 店舗名
       clone.querySelector(
         ".show-access a"
-      ).textContent = json.results.shop[i].address;
+      ).textContent = json.results.shop[i].address; // アクセス
       clone.querySelector(
         ".show-genre a"
-      ).textContent = ` ${json.results.shop[i].genre.name}`;
-
+      ).textContent = ` ${json.results.shop[i].genre.name}`;  // ジャンル
       clone.querySelector(
         ".name"
-      ).value = `${json.results.shop[i].name}`;
+      ).value = `${json.results.shop[i].name}`;  // （詳細ページ用）店舗名
       clone.querySelector(
         ".shop_id"
-      ).value = `${json.results.shop[i].id}`;
-
+      ).value = `${json.results.shop[i].id}`; // (詳細ページ用）店舗ID
       fragment.appendChild(clone);
     }
     document.querySelector(".main").appendChild(fragment);
 
-    // ページネーションをする
+    // １ページに10件以上あればページネーションをする
     const page_ary = [];
-    const i = Math.floor(json.results.results_available / 10) + 1;
+    const i = Math.floor(json.results.results_available / PAGE_ITEM_LIMIT) + 1;
     for (let j = 0; j < i; j++) {
       const span = document.createElement("a");
       span.textContent = j + 1;
       span.dataset.page = j + 1;
       span.value = PAGE_ITEM_LIMIT * j + 1;
       span.addEventListener("click", getPosition);
+      span.href = "#top";
+      span.style = "text-decoration: none;";
       span.className = "pagination";
       page_ary.push(span);
     }
@@ -186,7 +212,11 @@ function getPosition(event) {
     document.querySelector(".next").appendChild(fragment);  // ページリンクを反映
   }
 
-  // 省略記号の生成
+
+  /**
+   * 省略記号の生成
+   * @returns {HTMLAnchorElement} ページネーションに追加する省略記号（...）
+   */
   function makeEllipsis(){
     const ellipsis = document.createElement("a");
     const ellipsis_icon = document.createElement("i");
@@ -197,7 +227,15 @@ function getPosition(event) {
     return ellipsis;
   }
 
-  // ページネーションの生成
+  /**
+   * ページネーションの生成
+   * @param {DocumentFragment} fragment ページネーション部の要素
+   * @param {HTMLAnchorElement[]} page_ary ページ番号の配列
+   * @param {Number} c 現在ページ番号
+   * @param {Number} m 最終ページ番号
+   * @param {Number} d ページ番号表示範囲
+   * @returns ページネーション部の要素
+   */
   function pagination(fragment, page_ary, c, m, d) {
     var current = Number(c),
         last = Number(m),

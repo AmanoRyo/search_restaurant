@@ -6,6 +6,9 @@ const pet = document.getElementById("pet");	// ペットアイコン
 const lunch = document.getElementById("lunch");	// ランチアイコン
 const bansmoking = document.getElementById("bansmoking");	// 禁煙アイコン
 
+/**
+ * 店舗IDを参照して店舗の詳細情報を記載する
+ */
 async function search_detail(){
 	const shop_id = window.shop_id;	// 店舗のID
 	const key = apikey.value;	// APIキー
@@ -19,11 +22,13 @@ async function search_detail(){
 		method: "POST",
 		body: postData,
 	};
+
 	// FetchApiを使ってグルメサーチAPIからjsonを取得するリクエストをする
 	const res = await fetch('/php/id_search_query.php', data);
 	const d = await res.json();
 	const json = await JSON.parse(d);
 	
+	// 検索結果から情報記載
 	renderJson(json);
 	showParkingOption(json);
 	showWifiOption(json);
@@ -33,7 +38,11 @@ async function search_detail(){
 	displayUnlock();
 }
 
-// 駐車場項目の表示
+
+/**
+ * 駐車場項目の表示
+ * @param {JSON} json 
+ */
 function showParkingOption(json) {
 	const option = json.results.shop[0].parking;
 	const text = document.getElementById("parking-text");	// 駐車場の有無表示
@@ -47,7 +56,11 @@ function showParkingOption(json) {
 	}
 }
 
-// wifi項目の表示
+
+/**
+ * wifi項目の表示
+ * @param {JSON} json 
+ */
 function showWifiOption(json) {
 	const option = json.results.shop[0].wifi;
 	const text = document.getElementById("wifi-text");	// wifiの有無表示
@@ -65,7 +78,11 @@ function showWifiOption(json) {
 	}
 }
 
-// ぺット項目の表示
+
+/**
+ * ぺット項目の表示
+ * @param {JSON} json 
+ */
 function showPetOption(json) {
 	const option = json.results.shop[0].pet;
 	const text = document.getElementById("pet-text");	// ぺットの可否表示
@@ -79,7 +96,11 @@ function showPetOption(json) {
 	}
 }
 
-// ランチ項目の表示
+
+/**
+ * ランチ項目の表示
+ * @param {JSON} json 
+ */
 function showLunchOption(json) {
 	const option = json.results.shop[0].lunch;
 	const text = document.getElementById("lunch-text");	// ランチ有無表示
@@ -93,7 +114,11 @@ function showLunchOption(json) {
 	}
 }
 
-// 禁煙項目の表示
+
+/**
+ * 禁煙項目の表示
+ * @param {JSON} json 
+ */
 function showSmokingOption(json) {
 	const option = json.results.shop[0].non_smoking;
 	const text = document.getElementById("bansmoking-text");	// wifiの有無表示
@@ -111,34 +136,41 @@ function showSmokingOption(json) {
 	}
 }
 
-// JSONからデータ抽出
+
+/**
+ * JSONからデータ抽出
+ * @param {JSON} json 
+ */
 function renderJson(json) {
 	const latitude = json.results.shop[0].lat		// 緯度
 	const longitude = json.results.shop[0].lng	// 経度
 	document.querySelector(
 		".name"
-	).textContent = json.results.shop[0].name;
+	).textContent = json.results.shop[0].name;	// 店舗名
 	document.querySelector(
 		".name-kana"
-	).textContent = json.results.shop[0].name_kana;
+	).textContent = json.results.shop[0].name_kana;	// 店舗名のふりがな
 	document.querySelector(
 		".genre"
-	).textContent = `【${json.results.shop[0].genre.name}】 ${json.results.shop[0].genre.catch}`;
+	).textContent = `【${json.results.shop[0].genre.name}】 ${json.results.shop[0].genre.catch}`;	// ジャンルとキャッチフレーズ
 	document.querySelector(
 		".access"
-	).textContent = json.results.shop[0].address;
+	).textContent = json.results.shop[0].address;	// アクセス
 	document.querySelector(
 		".map"
-	).href = `https://www.google.co.jp/maps?q=${latitude},${longitude}&z=10`;
+	).href = `https://www.google.co.jp/maps?q=${latitude},${longitude}&z=10`;	// 位置情報に対応したGoogleMAP
 	document.querySelector(
 		".close"
-	).textContent = json.results.shop[0].close;
+	).textContent = json.results.shop[0].close;	// 定休日
 	document.querySelector(
 		".photo"
-	).src = json.results.shop[0].photo.pc.l;
+	).src = json.results.shop[0].photo.pc.l;	// 店舗画像
 }
 
-// ローディング画面を解除する
+
+/**
+ * ローディング画面を解除する
+ */
 function displayUnlock() {
   const spinner = document.getElementById('loading');
   spinner.classList.add('loaded');

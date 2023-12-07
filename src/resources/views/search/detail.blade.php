@@ -13,12 +13,15 @@
 
 <!-- コンテンツ画面 -->
 <div class="content">
+	{{--基本情報--}}
 	<div class="top_area">
+		{{--店舗名--}}
 		<ul class="top-name">
 			<li><div class="name-kana"></div></li>
 			<li><div class="name"></div></li>
 		</ul>
 		<hr>
+		{{--店舗名以外--}}
 		<div class="top-etc">
 			<div class="item"><i class="fa-solid fa-tag fa-lg fa-fw"></i><div class="item-title">ジャンル：</div><p class="genre"></p></div>
 			<div class="item"><i class="fa-solid fa-map-pin fa-lg fa-fw"></i><div class="item-title">アクセス：</div><p class="access"></p><br><a class="map" target="_blank"><i class="fa-solid fa-map" style="color: #eb7921;"></i>地図を見る</a></div>
@@ -29,38 +32,41 @@
 		<div class="image">
 			<img class="photo">
 		</div>
-		<table class="option">
-			<tr class="opt-icon">
-				<td class="opt-icon-item">
+		{{--こだわり情報--}}
+		<table class="kodawari">
+			{{--アイコン--}}
+			<tr class="koda-icon">
+				<td class="koda-icon-item">
 					<i id="parking" class="fa-solid fa-square-parking fa-2x"></i>
 				</td>
-				<td class="opt-icon-item">
+				<td class="koda-icon-item">
 					<i id="wifi" class="fa-solid fa-wifi fa-2x"></i>
 				</td>
-				<td class="opt-icon-item">
+				<td class="koda-icon-item">
 					<i id="pet" class="fa-solid fa-dog fa-2x"></i>
 				</td>
-				<td class="opt-icon-item">
+				<td class="koda-icon-item">
 					<i id="lunch" class="fa-solid fa-sun fa-2x"></i>
 				</td>
-				<td class="opt-icon-item">
+				<td class="koda-icon-item">
 					<i id="bansmoking" class="fa-solid fa-ban-smoking fa-2x"></i>
 				</td>
 			</tr>
-			<tr class="opt-text">
-				<td class="opt-text-item">
+			{{--テキスト--}}
+			<tr class="koda-text">
+				<td class="koda-text-item">
 					<div id="parking-text"></div>
 				</td>
-				<td class="opt-text-item">
+				<td class="koda-text-item">
 					<div id="wifi-text"></div>
 				</td>
-				<td class="opt-text-item">
+				<td class="koda-text-item">
 					<div id="pet-text"></div>
 				</td>
-				<td class="opt-text-item">
+				<td class="koda-text-item">
 					<div id="lunch-text"></div>
 				</td>
-				<td class="opt-text-item">
+				<td class="koda-text-item">
 					<div id="bansmoking-text"></div>
 				</td>
 			</tr>

@@ -30,7 +30,6 @@
     opacity: 0;
   }
 }
- 
 /*画面がロードしたら消えるように*/
 .loaded {
   opacity: 0;
@@ -65,18 +64,20 @@
 	display: flex;
 }
 
-ul {
+/*店舗名部分*/
+ul.top-name {
 	list-style: none;
 }
-
 .top-name li {
 	margin-bottom: 15px;
 }
 
+/*店舗名以外の基本情報部分*/
 .top-etc {
 	padding-left: 40px;
 }
 
+/*基本情報部分の区切り線*/
 hr {
 	border-top: 1px solid #e7e7e7;
 }
@@ -94,19 +95,23 @@ hr {
 	line-height: 35px;
 }
 
+/*店舗名以外の基本情報部分の項目*/
 .item {
 	display: flex;
 	align-items: center;
 }
 
+/*店舗名以外の基本情報部分のアイコン*/
 .item i{
 	margin-right: 10px;
 }
 
+/*店舗名以外の基本情報部分の項目テキスト*/
 .item p {
 	line-height: 20px;
 }
 
+/*店舗名以外の基本情報部分の項目見出しテキスト*/
 .item-title {
 	color: #191d3b;
 	font-weight: bold;
@@ -116,6 +121,7 @@ hr {
 	margin-right: 10px;
 }
 
+/*地図のリンク部*/
 .map {
 	margin-top: -3px;
 	margin-left: 10px;
@@ -135,8 +141,8 @@ hr {
 	border-radius: 3%;
 }
 
-/*追加情報*/
-.option {
+/*こだわり情報部*/
+.kodawari {
 	height: 100px;
 	margin: 30px auto;
 	width: 100%;
@@ -147,19 +153,19 @@ hr {
 	box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.363);
 }
 
-.opt-icon {
+/*こだわり情報部のアイコン*/
+.koda-icon {
 	height: 50px;
 }
-
-.opt-icon-item {
+.koda-icon-item {
 	text-align: center;
 }
 
-.opt-text {
+/*こだわり情報部のテキスト*/
+.koda-text {
 	width: 90px
 }
-
-.opt-text-item {
+.koda-text-item {
 	text-align: center;
 	font-size: smaller;
 	font-weight: bold;

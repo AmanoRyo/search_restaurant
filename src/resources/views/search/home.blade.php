@@ -6,11 +6,13 @@
 @endsection
 @section('content')
 <div class="content">
+	{{--検索エリア--}}
 	<div class="input_area">
 			<form>
 					<div class="search_option">
 						<div class="search_msg">こだわり条件でしぼる</div>
 						<br>
+						{{--こだわり条件--}}
 						<div class="kodawari">
 							<input name="kodawari-cb" type="checkbox" id="parkings">
 							<label class="kodawari-cb" for="parkings">駐車場あり</label>
@@ -25,6 +27,7 @@
 						</div>
 					</div>
 					<div class="search_option">
+						{{--検索範囲指定--}}
 						<div class="search_msg">ココから半径</div>
 						<select id="ranges">
 								<option value="1">300m</option>
@@ -33,19 +36,22 @@
 								<option value="4">2000m </option>
 								<option value="5">3000m </option>
 						</select>
-						<div class="search_msg">のレストランをさがす</div>
+						<div class="search_msg">の店舗をさがす</div>
 					</div>
 			</form>
 			<p>
+				{{--検索ボタン--}}
 				<button class="get_search"><i class="fa-solid fa-magnifying-glass"></i>さがす</button>
 			</p>
 	</div>
+	{{--検索結果エリア--}}
 	<div class="output_area">
 		<h2></h2>
 		<p class="page"></p>
 		<p class="status"></p>
 		<p class="loading"></p>
 		<div class="main"></div>
+		{{--店舗リスト--}}
 		<template id="template">
 			<form action='{{ route('detail') }}'>
 				<button type="submit" class="shoplist">
